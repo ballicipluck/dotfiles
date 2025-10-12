@@ -1,0 +1,45 @@
+# OS
+.DS_Store
+Desktop.ini
+
+.CFUserTextEncoding
+
+# git
+.git/
+
+# Thumbnail cache files
+._*
+Thumbs.db
+
+# Files that might appear on external disks
+.Spotlight-V100
+.Trashes
+
+# Lua
+/luarocks.bat
+/lua.bat
+/lua_modules
+/.luarocks
+
+# temp + cache
+/tmp
+log/*.log
+tmp/**/*
+
+/tags
+*.sw[nop]
+.bundle
+.byebug_history
+
+# secret
+.env
+my.README.md
+.gitconfig.local
+
+.gemini
+*.pyc
+db/*.sqlite3
+rerun.txt
+/log
+/bower_components/
+/node_modules/
