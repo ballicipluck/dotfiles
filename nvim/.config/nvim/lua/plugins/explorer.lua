@@ -8,7 +8,7 @@ return {
       sources = {
         explorer = {
           cycle = true,
-          auto_close = true,
+          -- auto_close = true,
           layout = { preview = "main" },
         },
         files = {
