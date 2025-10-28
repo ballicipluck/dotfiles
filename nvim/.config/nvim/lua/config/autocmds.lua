@@ -11,3 +11,10 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
   command = "silent! wall",
   nested = true,
 })
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function()
+    -- if vim.fn.argc() == 0 then
+    require("snacks.explorer").open()
+    -- end
+  end,
+})
