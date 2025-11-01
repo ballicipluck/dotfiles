@@ -66,6 +66,11 @@ return {
         "vim",
         "yaml",
       },
+      indent = {
+        enable = true,
+        -- Disable for Rust due to RSX macro issues with Dioxus
+        disable = { "rust" },
+      },
     },
   },
 }

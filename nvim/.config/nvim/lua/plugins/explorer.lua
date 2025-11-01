@@ -5,8 +5,12 @@ return {
       vim.api.nvim_create_autocmd("VimEnter", {
         group = vim.api.nvim_create_augroup("lazyvim_snacks", { clear = true }),
         callback = function()
+          -- Always open explorer when starting nvim without a file
           if vim.fn.argc() == 0 then
-            require("snacks.explorer").open()
+            -- Small delay to ensure other plugins are loaded
+            vim.defer_fn(function()
+              require("snacks.explorer").open()
+            end, 10)
           end
         end,
       })
@@ -14,7 +18,7 @@ return {
 
     -- @type snacks.Config
     opts = {
-      -- explorer = { replace_netrw = true },
+      explorer = { replace_netrw = true },
       dashboard = { enabled = false },
       picker = {
         ui_select = false,
