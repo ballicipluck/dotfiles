@@ -1,35 +1,30 @@
 return {
   {
     "folke/snacks.nvim",
-    init = function()
-      vim.api.nvim_create_autocmd("VimEnter", {
-        group = vim.api.nvim_create_augroup("lazyvim_snacks", { clear = true }),
-        callback = function()
-          -- Always open explorer when starting nvim without a file
-          if vim.fn.argc() == 0 then
-            -- Small delay to ensure other plugins are loaded
-            vim.defer_fn(function()
-              require("snacks.explorer").open()
-            end, 10)
-          end
-        end,
-      })
-    end,
-
     -- @type snacks.Config
     opts = {
-      explorer = { replace_netrw = true },
+      explorer = {
+        replace_netrw = true,
+      },
       dashboard = { enabled = false },
       picker = {
         ui_select = false,
-        -- layout = { preset = "ivy" },
+        -- Preview in a separate floating window, not the main buffer
+        -- previewers = {
+        --   file = {
+        --     -- Preview buffers are scratch buffers that don't affect the buffer list
+        --     scratch = true,
+        --   },
+        -- },
         sources = {
           explorer = {
+            follow_file = true,
+            tree = true,
             cycle = true,
             auto_close = true,
+            -- Don't use main buffer for preview
             layout = {
               preview = "main",
-              -- preset = "ivy",
               layout = {
                 position = "right",
               },
@@ -37,12 +32,43 @@ return {
           },
           files = {
             hidden = true,
-            -- ignored = true,
           },
         },
         hidden = true,
-        -- ignored = true,
       },
     },
+    keys = {
+      -- Override LazyVim's default to use cwd instead of LazyVim.root()
+      -- This prevents the root from jumping around
+      -- {
+      --   "<leader>fe",
+      --   function()
+      --     Snacks.explorer({ cwd = vim.fn.getcwd() })
+      --   end,
+      --   desc = "Explorer Snacks (cwd)",
+      -- },
+      {
+        "<leader>e",
+        function()
+          Snacks.explorer({ cwd = vim.fn.getcwd() })
+        end,
+        desc = "Explorer Snacks (cwd)",
+      },
+    },
+    init = function()
+      -- Open explorer on startup when no file is specified
+      vim.api.nvim_create_autocmd("UIEnter", {
+        group = vim.api.nvim_create_augroup("custom_explorer_startup", { clear = true }),
+        once = true,
+        callback = function()
+          if vim.fn.argc() == 0 then
+            -- Delay to ensure UI is fully initialized
+            vim.defer_fn(function()
+              Snacks.explorer.open({ cwd = vim.fn.getcwd() })
+            end, 50)
+          end
+        end,
+      })
+    end,
   },
 }

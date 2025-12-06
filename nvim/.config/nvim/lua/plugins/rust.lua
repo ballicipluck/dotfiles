@@ -69,13 +69,25 @@ return {
       },
     },
     config = function(_, opts)
-      if LazyVim.has("mason.nvim") then
-        local codelldb = vim.fn.exepath("codelldb")
+      -- Use codelldb from PATH if available (system-installed)
+      local codelldb = vim.fn.exepath("codelldb")
+      if codelldb ~= "" then
         local codelldb_lib_ext = io.popen("uname"):read("*l") == "Linux" and ".so" or ".dylib"
-        local library_path = vim.fn.expand("$MASON/opt/lldb/lib/liblldb" .. codelldb_lib_ext)
-        opts.dap = {
-          adapter = require("rustaceanvim.config").get_codelldb_adapter(codelldb, library_path),
+        -- Try to find liblldb in common locations
+        local possible_paths = {
+          "/usr/lib/liblldb" .. codelldb_lib_ext,
+          "/usr/local/lib/liblldb" .. codelldb_lib_ext,
+          "/opt/homebrew/lib/liblldb" .. codelldb_lib_ext,
+          "/opt/homebrew/opt/llvm/lib/liblldb" .. codelldb_lib_ext,
         }
+        for _, path in ipairs(possible_paths) do
+          if vim.fn.filereadable(path) == 1 then
+            opts.dap = {
+              adapter = require("rustaceanvim.config").get_codelldb_adapter(codelldb, path),
+            }
+            break
+          end
+        end
       end
       vim.g.rustaceanvim = vim.tbl_deep_extend("keep", vim.g.rustaceanvim or {}, opts or {})
       if vim.fn.executable("rust-analyzer") == 0 then
