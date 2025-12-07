@@ -7,6 +7,9 @@ Desktop.ini
 # git
 .git/
 
+# karabiner
+**/karabiner/automatic_backups/
+
 # Thumbnail cache files
 ._*
 Thumbs.db
