@@ -11,7 +11,6 @@ vim.opt.clipboard = { "unnamed", "unnamedplus" }
 -- provided by rust-analyzer.
 vim.g.lazyvim_rust_diagnostics = "rust-analyzer"
 
--- Rust indentation settings for better RSX (Dioxus) support
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "rust",
   callback = function()
@@ -20,9 +19,8 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.bo.indentexpr = ""
   end,
 })
+require("config.theme")
 
--- Show inline diagnostics for Rust files
--- Configure diagnostics globally (applies to all filetypes including Rust)
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "rust",
   callback = function()
