@@ -1,0 +1,38 @@
+gui:
+  showBottomLine: false
+  # See https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md#color-attributes
+  theme:
+    # activeBorderColor:
+    #   - "#3c3e5d"
+    #   - bold
+    activeBorderColor:
+      - "#282a36"
+    # inactiveBorderColor:
+    #   - "#3c3e5d"
+    inactiveBorderColor:
+      - "#282a36"
+    # searchingActiveBorderColor:
+    #   - "#8BE9FD"
+    #   - bold
+    searchingActiveBorderColor:
+      - "#282a36"
+    optionsTextColor:
+      - "#6272A4"
+    selectedLineBgColor:
+      - "#6272A4"
+    inactiveViewSelectedLineBgColor:
+      - bold
+    cherryPickedCommitFgColor:
+      - "#6272A4"
+    cherryPickedCommitBgColor:
+      - "#8BE9FD"
+    markedBaseCommitFgColor:
+      - "#8BE9FD"
+    markedBaseCommitBgColor:
+      - "#F1FA8C"
+    unstagedChangesColor:
+      - "#FF5555"
+    # defaultFgColor:
+    #   - "#F8F8F2"
+    defaultFgColor:
+      - "#6272A4"

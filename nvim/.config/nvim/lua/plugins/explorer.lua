@@ -23,6 +23,8 @@ return {
             cycle = true,
             auto_close = true,
             -- Don't use main buffer for preview
+            ignored = false,
+            hidden = false,
             layout = {
               preview = "main",
               layout = {
@@ -31,10 +33,12 @@ return {
             },
           },
           files = {
-            hidden = true,
+            hidden = false,
+            ignored = false,
           },
         },
-        hidden = true,
+        hidden = false,
+        ignored = false,
       },
     },
     keys = {

@@ -2,13 +2,15 @@
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 -- Add any additional options here
 
+vim.opt.conceallevel = 2
+vim.opt.clipboard = { "unnamed", "unnamedplus" }
+
 -- LSP Server to use for Rust.
 -- Set to "bacon-ls" to use bacon-ls instead of rust-analyzer.
 -- only for diagnostics. The rest of LSP support will still be
 -- provided by rust-analyzer.
 vim.g.lazyvim_rust_diagnostics = "rust-analyzer"
 
--- Rust indentation settings for better RSX (Dioxus) support
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "rust",
   callback = function()
@@ -17,9 +19,8 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.bo.indentexpr = ""
   end,
 })
+require("config.theme")
 
--- Show inline diagnostics for Rust files
--- Configure diagnostics globally (applies to all filetypes including Rust)
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "rust",
   callback = function()
