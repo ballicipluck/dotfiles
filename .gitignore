@@ -2,6 +2,19 @@
 .DS_Store
 Desktop.ini
 
+# fish
+**/fish/completions
+config.fish.bak.*
+fish_variables
+
+# fish config - always polluted by local applications, so ignore
+**/fish/config.fish
+
+# fish temp functions
+**/fish/functions/*.sf.fish
+**/fish/functions/*.temp.fish
+**/fish/functions/*.local.fish
+
 .CFUserTextEncoding
 
 # git

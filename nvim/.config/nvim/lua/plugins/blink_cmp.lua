@@ -4,7 +4,11 @@ return {
     keymap = {
       preset = "default",
       -- ["<CR>"] = false,
-      -- ["<Tab>"] = { "accept" },
+      ["<Tab>"] = { "accept", "fallback" },
+    },
+    completion = {
+      show_on_keyword = true,
+      show_on_insert = false,
     },
   },
 }
